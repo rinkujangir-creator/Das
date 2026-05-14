@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CreativeOps — ADDA247 Design</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f5f4f0;
+  --color-background-tertiary:#eeece6;
+  --color-background-info:#e6f1fb;
+  --color-background-success:#e1f5ee;
+  --color-background-warning:#faeeda;
+  --color-background-danger:#fcebeb;
+  --color-text-primary:#1a1a18;
+  --color-text-secondary:#5f5e5a;
+  --color-text-tertiary:#888780;
+  --color-text-info:#185fa5;
+  --color-text-success:#0f6e56;
+  --color-text-warning:#854f0b;
+  --color-text-danger:#a32d2d;
+  --color-border-tertiary:rgba(0,0,0,0.08);
+  --color-border-secondary:rgba(0,0,0,0.16);
+  --color-border-primary:rgba(0,0,0,0.26);
+  --color-border-info:rgba(24,95,165,0.25);
+  --color-border-success:rgba(15,110,86,0.25);
+  --color-border-warning:rgba(133,79,11,0.25);
+  --color-border-danger:rgba(163,45,45,0.25);
+  --border-radius-md:8px;
+  --border-radius-lg:12px;
+  --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'SF Mono','Fira Code',monospace;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --color-background-primary:#1e1e1c;
+    --color-background-secondary:#252523;
+    --color-background-tertiary:#2c2c2a;
+    --color-background-info:#0c2a47;
+    --color-background-success:#082b1e;
+    --color-background-warning:#3d2506;
+    --color-background-danger:#3d1515;
+    --color-text-primary:#e8e6de;
+    --color-text-secondary:#b4b2a9;
+    --color-text-tertiary:#73726c;
+    --color-text-info:#85b7eb;
+    --color-text-success:#5dcaa5;
+    --color-text-warning:#ef9f27;
+    --color-text-danger:#f09595;
+    --color-border-tertiary:rgba(255,255,255,0.08);
+    --color-border-secondary:rgba(255,255,255,0.16);
+    --color-border-primary:rgba(255,255,255,0.26);
+    --color-border-info:rgba(133,183,235,0.25);
+    --color-border-success:rgba(93,202,165,0.25);
+    --color-border-warning:rgba(239,159,39,0.25);
+    --color-border-danger:rgba(240,149,149,0.25);
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--color-background-tertiary);color:var(--color-text-primary);font-family:var(--font-sans);font-size:14px;line-height:1.5}
+input,select,textarea,button{font-family:inherit;font-size:13px;color:var(--color-text-primary);background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:7px 10px;outline:none;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--color-text-info)}
+button{cursor:pointer;background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);padding:6px 14px;border-radius:var(--border-radius-md);color:var(--color-text-primary)}
+button:hover{background:var(--color-background-secondary)}
+button:active{transform:scale(.98)}
+textarea{resize:vertical;font-family:var(--font-mono)}
+select{cursor:pointer}
+a{color:var(--color-text-info);text-decoration:none}
+a:hover{text-decoration:underline}
+.app{min-height:100vh;display:flex;flex-direction:column}
+.main-wrap{display:flex;flex:1;min-height:0}
+.sb{width:158px;flex-shrink:0;background:var(--color-background-secondary);border-right:.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;padding:14px 0;position:sticky;top:0;height:100vh}
+.sb-logo{padding:0 14px;margin-bottom:16px}
+.sb-logo-name{font-size:14px;font-weight:500}
+.sb-logo-sub{font-size:9px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.sb-sec{font-size:9px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;padding:0 14px;margin:10px 0 3px}
+.sb-btn{display:flex;align-items:center;gap:7px;padding:8px 14px;font-size:12px;color:var(--color-text-secondary);background:none;border:none;border-radius:0;width:100%;text-align:left;cursor:pointer}
+.sb-btn:hover{background:var(--color-background-primary);color:var(--color-text-primary)}
+.sb-btn:active{transform:none}
+.sb-btn.on{background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500}
+.sb-foot{margin-top:auto;padding:10px 12px;border-top:.5px solid var(--color-border-tertiary)}
+.nb{min-width:16px;height:16px;border-radius:8px;background:var(--color-background-danger);color:var(--color-text-danger);font-size:9px;padding:0 4px;font-weight:500;display:none;align-items:center;justify-content:center;margin-left:auto}
+.nb.on{display:inline-flex}
+.ca{flex:1;min-width:0;overflow-y:auto;padding:20px 24px}
+.stat-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:16px}
+.sc{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px}
+.sc-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-tertiary);margin-bottom:4px}
+.sc-val{font-size:24px;font-weight:500;line-height:1}
+.sc-sub{font-size:11px;color:var(--color-text-secondary);margin-top:3px}
+.chart-box{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px}
+.ct{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-tertiary);margin-bottom:10px}
+.br{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.bl{font-size:10px;color:var(--color-text-secondary);width:64px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bt{flex:1;background:var(--color-border-tertiary);border-radius:2px;height:8px;overflow:hidden}
+.bf{height:100%;border-radius:2px}
+.bv{font-size:10px;color:var(--color-text-primary);width:22px;text-align:right;flex-shrink:0}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:var(--border-radius-md);font-weight:500}
+.b-paid{background:var(--color-background-success);color:var(--color-text-success)}
+.b-blog{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.b-vert{background:var(--color-background-info);color:var(--color-text-info)}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-hdr{padding:12px 14px;border-bottom:.5px solid var(--color-border-tertiary)}
+.card-sec{padding:8px 12px;border-top:.5px solid var(--color-border-tertiary)}
+.card-paid{padding:8px 12px;border-top:.5px solid var(--color-border-tertiary);background:var(--color-background-success)}
+.sl{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-tertiary);padding-bottom:6px;border-bottom:.5px solid var(--color-border-tertiary);display:block;margin-bottom:0}
+.fr{display:flex;align-items:flex-start;gap:6px;padding:5px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.fr:last-child{border-bottom:none}
+.fl{font-size:10px;color:var(--color-text-tertiary);min-width:68px;flex-shrink:0;text-transform:uppercase;letter-spacing:.03em;padding-top:2px}
+.fv{font-size:12px;color:var(--color-text-primary);flex:1;line-height:1.5;word-break:break-word}
+.cp-btn{font-size:10px;padding:2px 6px;flex-shrink:0;border-color:var(--color-border-tertiary);color:var(--color-text-secondary)}
+.cp-btn:hover{border-color:var(--color-border-secondary)}
+.cp-btn.ok{color:var(--color-text-success);border-color:var(--color-border-success)}
+.fb{font-size:11px;padding:4px 12px;border-color:var(--color-border-secondary)}
+.fb.on{background:var(--color-background-secondary);border-color:var(--color-border-primary);font-weight:500}
+.notif{background:var(--color-background-warning);border:.5px solid var(--color-border-warning);border-radius:var(--border-radius-md);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--color-text-tertiary);flex-shrink:0;display:inline-block}
+.sync-dot.ok{background:var(--color-text-success)}
+.sync-dot.err{background:var(--color-text-danger)}
+.sync-dot.spin{background:var(--color-text-info);animation:pulse .8s ease-in-out infinite}
+.perf-hdr{display:grid;grid-template-columns:1fr 50px 50px 64px;font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-tertiary);padding:7px 10px;border-bottom:.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);border-radius:var(--border-radius-md) var(--border-radius-md) 0 0}
+.perf-row{display:grid;grid-template-columns:1fr 50px 50px 64px;font-size:12px;padding:7px 10px;border-bottom:.5px solid var(--color-border-tertiary);align-items:center}
+.perf-row:last-child{border-bottom:none}
+.toast{position:fixed;top:16px;right:16px;background:var(--color-background-warning);border:.5px solid var(--color-border-warning);border-radius:var(--border-radius-lg);padding:10px 16px;font-size:12px;font-weight:500;color:var(--color-text-warning);z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.setup-card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;margin-bottom:14px}
+.divider{display:flex;align-items:center;gap:10px;margin:12px 0;color:var(--color-text-tertiary);font-size:11px}
+.divider::before,.divider::after{content:'';flex:1;border-top:.5px solid var(--color-border-tertiary)}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+<!-- ─── SETUP SCREEN ─────────────────────────────────────────────────────── -->
+<div id="s-setup" style="max-width:500px;margin:2rem auto;padding:0 1rem">
+  <div style="margin-bottom:20px">
+    <p style="font-size:18px;font-weight:500;margin-bottom:3px">CreativeOps</p>
+    <p style="font-size:13px;color:var(--color-text-secondary)">ADDA247 Design — DFP Campaign Dashboard</p>
+  </div>
+
+  <div class="setup-card">
+    <p style="font-size:13px;font-weight:500;margin-bottom:10px"><i class="ti ti-link" aria-hidden="true"></i> Connect Google Sheet <span style="font-size:11px;color:var(--color-text-tertiary);font-weight:400">(auto-syncs every 5 min)</span></p>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;margin-bottom:12px;font-size:12px;color:var(--color-text-secondary);line-height:1.8">
+      <b style="color:var(--color-text-primary)">Step 1:</b> Open your Google Sheet<br>
+      <b style="color:var(--color-text-primary)">Step 2:</b> File → Share → <b>Publish to web</b><br>
+      <b style="color:var(--color-text-primary)">Step 3:</b> Select DFP tab → choose <b>CSV</b> → Publish<br>
+      <b style="color:var(--color-text-primary)">Step 4:</b> Copy the link and paste below
+    </div>
+    <input id="sheet-url" type="url" placeholder="https://docs.google.com/spreadsheets/d/.../pub?output=csv" style="width:100%;margin-bottom:8px">
+    <button onclick="connectSheet()" style="width:100%">Connect &amp; Sync ↗</button>
+    <p id="url-err" style="display:none;color:var(--color-text-danger);font-size:11px;margin-top:6px"></p>
+  </div>
+
+  <div class="divider">or paste CSV directly</div>
+
+  <textarea id="csv-in" rows="5" style="width:100%;margin-bottom:8px" placeholder="Google Sheet → File → Download → CSV (.csv) → open in text editor → paste here"></textarea>
+  <div style="display:flex;gap:8px">
+    <button onclick="loadCSV()" style="flex:1">Load CSV</button>
+    <button onclick="useSample()" style="color:var(--color-text-secondary);font-size:12px">Sample data</button>
+  </div>
+  <p id="csv-err" style="display:none;color:var(--color-text-danger);font-size:11px;margin-top:6px"></p>
+</div>
+
+<!-- ─── MAIN APP ───────────────────────────────────────────────────────────── -->
+<div id="s-app" class="main-wrap" style="display:none">
+
+  <!-- Sidebar -->
+  <nav class="sb">
+    <div class="sb-logo">
+      <p class="sb-logo-name">CreativeOps</p>
+      <p class="sb-logo-sub">ADDA247 DESIGN</p>
+    </div>
+    <p class="sb-sec">MAIN</p>
+    <button id="nb-dash" class="sb-btn on" onclick="sw('dash')"><i class="ti ti-layout-dashboard" style="font-size:15px" aria-hidden="true"></i>Dashboard</button>
+    <button id="nb-dfp" class="sb-btn" onclick="sw('dfp')"><i class="ti ti-file-text" style="font-size:15px" aria-hidden="true"></i>DFP Requests<span id="n-badge" class="nb">0</span></button>
+    <p class="sb-sec">ANALYTICS</p>
+    <button id="nb-rep" class="sb-btn" onclick="sw('reports')"><i class="ti ti-chart-bar" style="font-size:15px" aria-hidden="true"></i>Reports</button>
+    <div class="sb-foot">
+      <button onclick="manualSync()" style="width:100%;font-size:11px;margin-bottom:8px;background:var(--color-background-info);color:var(--color-text-info);border-color:var(--color-border-info)"><i class="ti ti-refresh" aria-hidden="true"></i> Sync Now</button>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <span class="sync-dot" id="sync-dot"></span>
+        <span id="sync-label" style="font-size:10px;color:var(--color-text-tertiary)">Not connected</span>
+      </div>
+      <p id="sync-time" style="font-size:9px;color:var(--color-text-tertiary);margin-bottom:8px"></p>
+      <button onclick="resetApp()" style="width:100%;font-size:10px;color:var(--color-text-tertiary);border-color:var(--color-border-tertiary)"><i class="ti ti-logout" aria-hidden="true"></i> Change Sheet</button>
+    </div>
+  </nav>
+
+  <!-- Content area -->
+  <main class="ca">
+
+    <!-- DASHBOARD VIEW -->
+    <div id="v-dash">
+      <p style="font-size:18px;font-weight:500;margin-bottom:3px">Dashboard</p>
+      <p id="dash-sub" style="font-size:12px;color:var(--color-text-secondary);margin-bottom:16px"></p>
+      <div class="stat-g" id="stats-row"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div class="chart-box"><p class="ct">Designer Workload</p><div id="des-bars"></div></div>
+        <div class="chart-box"><p class="ct">Status Breakdown</p><div id="status-donut" style="display:flex;align-items:center;gap:12px"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div class="chart-box"><p class="ct">Paid vs App/Blog</p><div id="paid-donut" style="display:flex;align-items:center;gap:12px"></div></div>
+        <div class="chart-box"><p class="ct">Top Verticals</p><div id="vert-bars"></div></div>
+      </div>
+      <div class="chart-box">
+        <p class="ct">Designer Performance</p>
+        <div class="perf-hdr"><span>Designer</span><span style="text-align:center">Total</span><span style="text-align:center">Paid</span><span style="text-align:center">Approved</span></div>
+        <div id="perf-table" style="border:.5px solid var(--color-border-tertiary);border-radius:0 0 var(--border-radius-md) var(--border-radius-md);border-top:none"></div>
+      </div>
+    </div>
+
+    <!-- DFP REQUESTS VIEW -->
+    <div id="v-dfp" style="display:none">
+      <div id="notif-area"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <p style="font-size:18px;font-weight:500">DFP Requests</p>
+        <span id="dfp-count" style="font-size:12px;color:var(--color-text-secondary)"></span>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
+        <div style="display:flex;gap:4px">
+          <button class="fb on" onclick="ff(this,'all')">All</button>
+          <button class="fb" onclick="ff(this,'paid')">Paid</button>
+          <button class="fb" onclick="ff(this,'notpaid')">Not paid</button>
+        </div>
+        <select id="d-sel" onchange="renderDFP()" style="font-size:11px;padding:4px 8px"><option value="">All designers</option></select>
+        <input id="d-srch" type="text" placeholder="Search exam, vertical..." oninput="renderDFP()" style="font-size:12px;flex:1;min-width:120px">
+      </div>
+      <div id="dfp-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px"></div>
+      <p id="dfp-empty" style="display:none;text-align:center;color:var(--color-text-secondary);padding:3rem;font-size:13px">No matching campaigns.</p>
+    </div>
+
+    <!-- REPORTS VIEW -->
+    <div id="v-reports" style="display:none">
+      <p style="font-size:18px;font-weight:500;margin-bottom:3px">Reports</p>
+      <p id="rep-sub" style="font-size:12px;color:var(--color-text-secondary);margin-bottom:16px"></p>
+      <div class="stat-g" id="rep-stats"></div>
+      <div class="chart-box" style="margin-bottom:12px">
+        <p class="ct">Requests by Date</p>
+        <div style="position:relative;height:220px"><canvas id="c-date" role="img" aria-label="Line chart showing DFP requests over time"></canvas></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div class="chart-box">
+          <p class="ct">Designer Performance</p>
+          <div id="c-des-wrap" style="position:relative"><canvas id="c-des" role="img" aria-label="Horizontal bar chart of requests per designer"></canvas></div>
+        </div>
+        <div class="chart-box">
+          <p class="ct">Approval Status</p>
+          <div style="position:relative;height:190px"><canvas id="c-status" role="img" aria-label="Doughnut chart of approval status"></canvas></div>
+          <div id="leg-status" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font-size:11px;color:var(--color-text-secondary)"></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="chart-box">
+          <p class="ct">By Vertical</p>
+          <div id="c-vert-wrap" style="position:relative"><canvas id="c-vert" role="img" aria-label="Horizontal bar chart of requests per vertical"></canvas></div>
+        </div>
+        <div class="chart-box">
+          <p class="ct">Paid vs App/Blog</p>
+          <div style="position:relative;height:190px"><canvas id="c-paid" role="img" aria-label="Doughnut chart showing paid vs app/blog split"></canvas></div>
+          <div id="leg-paid" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font-size:11px;color:var(--color-text-secondary)"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let allRows=[], cmap={}, cardData=[], dfpF='all';
+let notifList=[], sheetUrl='', pollTimer=null;
+const charts={};
+const COLS=['#1D9E75','#378ADD','#BA7517','#D85A30','#7F77DD','#D4537E','#639922','#D05538'];
+
+const PATS={
+  date:/^date$/i, endDate:/end.?date/i, lp:/^lp$|landing.?page/i,
+  paid:/need.?paid|paid.*yes/i, goLive:/go.?live/i, pointers:/pointer/i,
+  articleLinks:/article.?link/i, vertical:/^vertical$/i, appSlot:/app.?slot/i,
+  blogSlot:/blog.?slot/i, designer:/designer/i, examName:/exam.*name|batch.*name/i,
+  tagline:/^tagline$|prep.?for|posit.*desig/i, benefits:/benefit|usp/i, cta:/^cta$/i,
+  unit:/^unit/i, paidTitle:/paid.?creative.?titl/i, paidCopy:/paid.?creative.?copy/i,
+  paidDesc:/paid.?creative.?desc/i, keyPoints:/key.?point/i,
+  approval:/approval/i, driveLink:/drive.?link/i
+};
+
+// ─── STORAGE (localStorage) ───────────────────────────────────────────────────
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function load(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch(e){return null;}}
+
+// ─── UTILITIES ────────────────────────────────────────────────────────────────
+function parseCSV(txt){
+  const out=[];let row=[],cell='',inQ=false;
+  for(let i=0;i<txt.length;i++){
+    const c=txt[i],n=txt[i+1];
+    if(inQ){if(c==='"'&&n==='"'){cell+='"';i++;}else if(c==='"')inQ=false;else cell+=c;}
+    else{if(c==='"')inQ=true;else if(c===','){row.push(cell.trim());cell='';}
+    else if(c==='\n'){row.push(cell.trim());cell='';if(row.some(v=>v))out.push(row);row=[];}
+    else if(c!=='\r')cell+=c;}
+  }
+  if(row.length){row.push(cell.trim());if(row.some(v=>v))out.push(row);}
+  return out;
+}
+function detectCols(hdr){const m={};hdr.forEach((h,i)=>{const s=h.trim();for(const[k,p]of Object.entries(PATS)){if(m[k]===undefined&&p.test(s))m[k]=i;}});return m;}
+function g(row,k){const i=cmap[k];if(i===undefined||i>=row.length)return'';return row[i]||'';}
+function eh(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function rowId(r){return g(r,'lp')+'|'+g(r,'date')+'|'+g(r,'examName');}
+function isPaid(r){return g(r,'paid').toLowerCase()==='yes';}
+function isApproved(r){return/(approved|done|complete)/i.test(g(r,'approval'));}
+function isPending(r){return/(pending)/i.test(g(r,'approval'))||!g(r,'approval');}
+function dkMode(){return window.matchMedia('(prefers-color-scheme:dark)').matches;}
+function tCol(){return dkMode()?'#c2c0b6':'#3d3d3a';}
+function gCol(){return dkMode()?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.05)';}
+function parseDate(s){
+  if(!s)return null;
+  const p=s.trim().split(' ');
+  const mo={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  const d=parseInt(p[0]),m=mo[p[1]?.substring(0,3)];
+  if(!isNaN(d)&&m!==undefined)return new Date(2026,m,d);
+  return null;
+}
+function showErr(id,m){const e=document.getElementById(id);e.textContent=m;e.style.display='block';}
+
+// ─── GOOGLE SHEETS SYNC ───────────────────────────────────────────────────────
+function toCSVUrl(url){
+  if(url.includes('pub?output=csv')||url.includes('/pub?'))return url;
+  const m=url.match(/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+  if(!m)return null;
+  const id=m[1],gm=url.match(/gid=(\d+)/),gid=gm?gm[1]:'0';
+  return`https://docs.google.com/spreadsheets/d/${id}/pub?output=csv&gid=${gid}`;
+}
+async function fetchSheet(url){
+  try{
+    const r=await fetch(url,{mode:'cors'});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    return await r.text();
+  }catch(e){console.error('Fetch failed:',e);return null;}
+}
+async function connectSheet(){
+  const url=document.getElementById('sheet-url').value.trim();
+  if(!url){showErr('url-err','Paste the published CSV URL.');return;}
+  const csvUrl=toCSVUrl(url);
+  if(!csvUrl){showErr('url-err','Invalid URL. Make sure you published the sheet as CSV first.');return;}
+  setSyncState('spin','Connecting...');
+  const csv=await fetchSheet(csvUrl);
+  if(!csv){setSyncState('err','Fetch failed — is the sheet published publicly?');showErr('url-err','Could not fetch. Ensure File → Share → Publish to web is done.');return;}
+  sheetUrl=csvUrl;
+  save('dfp-url',csvUrl);
+  await processData(csv,false);
+  startPolling();
+}
+async function manualSync(){
+  if(!sheetUrl){alert('No sheet connected. Connect via URL first.');return;}
+  setSyncState('spin','Syncing...');
+  const csv=await fetchSheet(sheetUrl);
+  if(!csv){setSyncState('err','Sync failed');return;}
+  await processData(csv,true);
+}
+function startPolling(){
+  if(pollTimer)clearInterval(pollTimer);
+  pollTimer=setInterval(async()=>{
+    if(!sheetUrl)return;
+    const csv=await fetchSheet(sheetUrl);
+    if(csv)processData(csv,true);
+  },5*60*1000);
+}
+async function loadCSV(){
+  const csv=document.getElementById('csv-in').value.trim();
+  if(!csv){showErr('csv-err','Paste CSV content first.');return;}
+  await processData(csv,false);
+}
+
+// ─── CORE DATA PROCESSING ──────────────────────────────────────────────────────
+async function processData(csv,isSync){
+  const parsed=parseCSV(csv);
+  if(parsed.length<2){setSyncState('err','Invalid CSV format.');return;}
+  cmap=detectCols(parsed[0]);
+  const newRows=parsed.slice(1).filter(r=>r.some(v=>v));
+  if(!newRows.length){setSyncState('err','No data rows found.');return;}
+
+  if(isSync&&allRows.length>0){
+    const oldIds=new Set(allRows.map(rowId).filter(Boolean));
+    const added=newRows.filter(r=>{const id=rowId(r);return id&&!oldIds.has(id);});
+    if(added.length>0){
+      added.forEach(r=>{
+        notifList.unshift({
+          exam:g(r,'examName')||'New Campaign',
+          designer:g(r,'designer')||'Unassigned',
+          paid:isPaid(r), vertical:g(r,'vertical')||'',
+          date:g(r,'date')||'',
+          time:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}),
+          isNew:true
+        });
+      });
+      save('dfp-notifs',notifList.slice(0,40));
+      refreshBadge();
+      showToast(added.length+' new campaign'+(added.length>1?'s':'')+' added!');
+    }
+  }
+  allRows=newRows;
+  save('dfp-row-ids',newRows.map(rowId).filter(Boolean));
+
+  const designers=[...new Set(allRows.map(r=>g(r,'designer')).filter(Boolean))].sort();
+  const sel=document.getElementById('d-sel');
+  sel.innerHTML='<option value="">All designers</option>'+designers.map(d=>`<option>${eh(d)}</option>`).join('');
+
+  const now=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('dash-sub').textContent=now+' · '+allRows.length+' total campaigns';
+  document.getElementById('rep-sub').textContent=allRows.length+' campaigns · '+Object.keys(cmap).length+' columns mapped';
+  setSyncState('ok',sheetUrl?'Auto-sync on':'Manual load');
+  document.getElementById('sync-time').textContent='Synced '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+
+  document.getElementById('s-setup').style.display='none';
+  document.getElementById('s-app').style.display='flex';
+  renderDash();
+  const curView=['dash','dfp','reports'].find(v=>document.getElementById('v-'+v).style.display!=='none');
+  if(curView==='dfp')renderDFP();
+  if(curView==='reports')renderReports();
+}
+
+// ─── UI HELPERS ───────────────────────────────────────────────────────────────
+function showToast(msg){
+  const t=document.createElement('div');
+  t.className='toast';
+  t.innerHTML='<i class="ti ti-bell-ringing" aria-hidden="true" style="margin-right:6px"></i>'+eh(msg);
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),4000);
+}
+function setSyncState(state,label){
+  const d=document.getElementById('sync-dot'),l=document.getElementById('sync-label');
+  d.className='sync-dot '+(state==='ok'?'ok':state==='err'?'err':state==='spin'?'spin':'');
+  l.textContent=label;
+}
+function refreshBadge(){
+  const b=document.getElementById('n-badge');
+  if(notifList.length){b.textContent=notifList.length;b.className='nb on';}
+  else{b.className='nb';}
+}
+function donut(containerId,svgId,legendId,vals,cols,labels){
+  const el=document.getElementById(containerId);if(!el)return;
+  const tot=vals.reduce((a,b)=>a+b,0)||1;
+  const sz=68,sw=12,r=(sz-sw)/2,c=2*Math.PI*r;
+  let cum=0;
+  const segs=vals.map((v,i)=>{
+    const dash=(v/tot)*c,off=c*.25-cum;cum+=dash;
+    return`<circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${cols[i]}" stroke-width="${sw}" stroke-dasharray="${dash} ${c-dash}" stroke-dashoffset="${off}"/>`;
+  });
+  const lgd=labels.map((l,i)=>`<div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--color-text-secondary)"><div style="width:7px;height:7px;border-radius:50%;background:${cols[i]}"></div><span>${l}</span><b style="color:var(--color-text-primary);margin-left:2px">${vals[i]}</b><span style="color:var(--color-text-tertiary)">${Math.round(vals[i]/tot*100)}%</span></div>`).join('');
+  el.innerHTML=`<svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}">${segs.join('')}<text x="${sz/2}" y="${sz/2+4}" text-anchor="middle" style="font-size:11px;font-weight:500;fill:var(--color-text-primary)">${tot}</text></svg><div style="display:flex;flex-direction:column;gap:6px">${lgd}</div>`;
+}
+function bars(id,entries,offset){
+  const el=document.getElementById(id);if(!el||!entries.length)return;
+  const max=Math.max(...entries.map(e=>e[1]),1);
+  el.innerHTML=entries.map(([n,v],i)=>`<div class="br"><span class="bl" title="${eh(n)}">${eh(n)}</span><div class="bt"><div class="bf" style="width:${Math.round(v/max*100)}%;background:${COLS[(i+offset)%COLS.length]}"></div></div><span class="bv">${v}</span></div>`).join('');
+}
+function mkChart(id,cfg){
+  if(charts[id]){charts[id].destroy();delete charts[id];}
+  const ctx=document.getElementById(id);if(!ctx)return;
+  charts[id]=new Chart(ctx,cfg);
+}
+
+// ─── DASHBOARD ────────────────────────────────────────────────────────────────
+function renderDash(){
+  const tot=allRows.length,appr=allRows.filter(isApproved).length;
+  const pend=allRows.filter(isPending).length,paidC=allRows.filter(isPaid).length;
+  const unasn=allRows.filter(r=>!g(r,'designer')).length;
+  const inprog=allRows.filter(r=>/(progress|review|in.?prog)/i.test(g(r,'approval'))).length;
+
+  document.getElementById('stats-row').innerHTML=[
+    {l:'Total',v:tot,c:'primary',s:'campaigns'},
+    {l:'Approved',v:appr,c:'success',s:Math.round(appr/(tot||1)*100)+'% rate'},
+    {l:'Pending',v:pend,c:'warning',s:'need action'},
+    {l:'Paid',v:paidC,c:'info',s:'creative needed'},
+    {l:'Unassigned',v:unasn,c:unasn?'danger':'success',s:'no designer'}
+  ].map(s=>`<div class="sc"><p class="sc-lbl">${s.l}</p><p class="sc-val" style="color:var(--color-text-${s.c})">${s.v}</p><p class="sc-sub">${s.s}</p></div>`).join('');
+
+  const desMap={};allRows.forEach(r=>{const d=g(r,'designer')||'Unassigned';desMap[d]=(desMap[d]||0)+1;});
+  const desEnt=Object.entries(desMap).sort((a,b)=>b[1]-a[1]);
+  bars('des-bars',desEnt,0);
+
+  donut('status-donut','sd-svg','',
+    [appr,inprog,pend],
+    [COLS[0],COLS[1],COLS[2]],
+    ['Approved','In review','Pending']);
+
+  donut('paid-donut','pd-svg','',
+    [paidC,tot-paidC],
+    [COLS[0],COLS[6]],
+    ['Paid','App/Blog']);
+
+  const vertMap={};allRows.forEach(r=>{const v=g(r,'vertical')||'Other';vertMap[v]=(vertMap[v]||0)+1;});
+  bars('vert-bars',Object.entries(vertMap).sort((a,b)=>b[1]-a[1]).slice(0,7),2);
+
+  document.getElementById('perf-table').innerHTML=desEnt.map(([name,count],i)=>{
+    const dr=allRows.filter(r=>(g(r,'designer')||'Unassigned')===name);
+    const dp=dr.filter(isPaid).length,da=dr.filter(isApproved).length;
+    return`<div class="perf-row"><div style="display:flex;align-items:center;gap:7px"><span style="display:inline-flex;width:20px;height:20px;border-radius:50%;background:${COLS[i%COLS.length]}22;color:${COLS[i%COLS.length]};font-size:8px;font-weight:500;align-items:center;justify-content:center;flex-shrink:0">${name.substring(0,2).toUpperCase()}</span>${eh(name)}</div><div style="text-align:center">${count}</div><div style="text-align:center;color:var(--color-text-success)">${dp}</div><div style="text-align:center;color:var(--color-text-info)">${da}</div></div>`;
+  }).join('');
+}
+
+// ─── NOTIFICATIONS ────────────────────────────────────────────────────────────
+function renderNotifs(){
+  const area=document.getElementById('notif-area');
+  if(!notifList.length){area.innerHTML='';return;}
+  area.innerHTML=`<div style="background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <p style="font-size:13px;font-weight:500"><i class="ti ti-bell" aria-hidden="true"></i> New Requests Added (${notifList.length})</p>
+      <button onclick="clearNotifs()" style="font-size:11px;padding:3px 10px;color:var(--color-text-secondary)">Clear all</button>
+    </div>
+    ${notifList.slice(0,6).map(n=>`<div class="notif"><i class="ti ti-bell-ringing" style="font-size:15px;color:var(--color-text-warning);flex-shrink:0" aria-hidden="true"></i><div style="flex:1;min-width:0"><p style="font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${eh(n.exam)}</p><p style="font-size:11px;color:var(--color-text-secondary)">Assigned → <b style="color:var(--color-text-primary)">${eh(n.designer)}</b> · ${n.paid?'<span style="color:var(--color-text-success)">Paid</span>':'App/Blog'}${n.vertical?' · '+eh(n.vertical):''} · ${eh(n.time)}</p></div>${n.isNew?'<span style="font-size:9px;background:var(--color-background-warning);color:var(--color-text-warning);padding:2px 7px;border-radius:var(--border-radius-md);font-weight:500;flex-shrink:0">NEW</span>':''}</div>`).join('')}
+    ${notifList.length>6?`<p style="font-size:11px;color:var(--color-text-tertiary);text-align:center;margin-top:8px">+${notifList.length-6} more</p>`:''}
+  </div>`;
+}
+function clearNotifs(){notifList=[];document.getElementById('notif-area').innerHTML='';document.getElementById('n-badge').className='nb';save('dfp-notifs',[]);}
+
+// ─── DFP REQUESTS ─────────────────────────────────────────────────────────────
+function ff(btn,val){
+  dfpF=val;
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderDFP();
+}
+function renderDFP(){
+  const des=document.getElementById('d-sel').value;
+  const srch=(document.getElementById('d-srch').value||'').toLowerCase();
+  const fil=allRows.filter(r=>{
+    if(dfpF==='paid'&&!isPaid(r))return false;
+    if(dfpF==='notpaid'&&isPaid(r))return false;
+    if(des&&g(r,'designer')!==des)return false;
+    if(srch){const t=[g(r,'examName'),g(r,'vertical'),g(r,'tagline'),g(r,'designer')].join(' ').toLowerCase();if(!t.includes(srch))return false;}
+    return true;
+  });
+  cardData=fil;
+  document.getElementById('dfp-count').textContent=fil.length+' of '+allRows.length;
+  const grid=document.getElementById('dfp-grid'),empty=document.getElementById('dfp-empty');
+  if(!fil.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=fil.map((_,i)=>makeCard(i)).join('');
+}
+function makeCard(idx){
+  const row=cardData[idx],ip=isPaid(row);
+  const exam=g(row,'examName')||'Untitled',vert=g(row,'vertical'),des=g(row,'designer');
+  const date=g(row,'date'),endD=g(row,'endDate');
+  const tag=g(row,'tagline'),ben=g(row,'benefits'),cta=g(row,'cta');
+  const pT=g(row,'paidTitle'),pC=g(row,'paidCopy'),pD=g(row,'paidDesc'),kp=g(row,'keyPoints');
+  const lp=g(row,'lp'),dl=g(row,'driveLink'),ini=des?des.substring(0,2).toUpperCase():'??';
+  const fr=(lbl,field)=>{const v=g(row,field);if(!v)return'';return`<div class="fr"><span class="fl">${lbl}</span><span class="fv">${eh(v)}</span><button class="cp-btn" onclick="cpF(${idx},'${field}')" title="Copy ${lbl}"><i class="ti ti-copy" aria-hidden="true"></i></button></div>`;};
+  const lr=(lbl,field)=>{const v=g(row,field);if(!v)return'';const d=v.length>36?v.substring(0,36)+'…':v;return`<div class="fr"><span class="fl">${lbl}</span><span class="fv" style="font-size:11px"><a href="${eh(v)}" target="_blank" rel="noopener">${eh(d)}</a></span><button class="cp-btn" onclick="cpF(${idx},'${field}')" title="Copy URL"><i class="ti ti-copy" aria-hidden="true"></i></button></div>`;};
+  return`<div class="card"><div class="card-hdr">
+    <p style="font-size:13px;font-weight:500;margin-bottom:8px;line-height:1.4">${eh(exam)}</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px">
+      <span class="badge ${ip?'b-paid':'b-blog'}">${ip?'Paid':'App/Blog'}</span>
+      ${vert?`<span class="badge b-vert">${eh(vert)}</span>`:''}
+      ${date?`<span style="font-size:10px;color:var(--color-text-tertiary)"><i class="ti ti-calendar" aria-hidden="true"></i> ${eh(date)}${endD?' → '+eh(endD):''}</span>`:''}
+      ${des?`<span style="font-size:11px;color:var(--color-text-secondary);display:inline-flex;align-items:center;gap:4px"><span style="display:inline-flex;width:17px;height:17px;border-radius:50%;background:var(--color-background-info);color:var(--color-text-info);font-size:8px;font-weight:500;align-items:center;justify-content:center">${eh(ini)}</span>${eh(des)}</span>`:''}
+    </div>
+  </div>
+  <div class="card-sec"><span class="sl">Design content</span>
+    ${fr('Tagline','tagline')}${fr('Benefits','benefits')}${fr('CTA','cta')}
+    ${!tag&&!ben&&!cta?'<p style="font-size:11px;color:var(--color-text-tertiary);padding:5px 0">No design content detected</p>':''}
+  </div>
+  ${ip&&(pT||pC||pD)?`<div class="card-paid"><span class="sl" style="color:var(--color-text-success)">Paid creative</span>
+    ${fr('Title','paidTitle')}${fr('Copy','paidCopy')}${fr('Desc+CTA','paidDesc')}${fr('Key Points','keyPoints')}
+  </div>`:''}
+  <div class="card-sec"><span class="sl">Links</span>
+    ${lr('LP URL','lp')}${lr('Drive','driveLink')}
+    ${!lp&&!dl?'<p style="font-size:11px;color:var(--color-text-tertiary);padding:5px 0">No links</p>':''}
+  </div>
+  <div class="card-sec">
+    <button onclick="cpAll(${idx})" style="width:100%;font-size:11px"><i class="ti ti-copy" aria-hidden="true" style="margin-right:4px"></i>Copy all content</button>
+  </div></div>`;
+}
+function cpF(idx,field){doCP(g(cardData[idx],field),event.currentTarget);}
+function cpAll(idx){
+  const r=cardData[idx],ip=isPaid(r);
+  const txt=[
+    `Paid: ${ip?'Yes':'No'}`,
+    g(r,'examName')?'Exam/Batch: '+g(r,'examName'):'',
+    g(r,'tagline')?'Tagline: '+g(r,'tagline'):'',
+    g(r,'benefits')?'Benefits: '+g(r,'benefits'):'',
+    g(r,'cta')?'CTA: '+g(r,'cta'):'',
+    ip&&g(r,'paidTitle')?'Paid Title: '+g(r,'paidTitle'):'',
+    ip&&g(r,'paidCopy')?'Paid Copy: '+g(r,'paidCopy'):'',
+    ip&&g(r,'paidDesc')?'Paid Desc+CTA: '+g(r,'paidDesc'):'',
+    g(r,'keyPoints')?'Key Points: '+g(r,'keyPoints'):'',
+    g(r,'lp')?'LP: '+g(r,'lp'):'',
+    g(r,'driveLink')?'Drive: '+g(r,'driveLink'):'',
+  ].filter(Boolean).join('\n');
+  doCP(txt,event.currentTarget);
+}
+function doCP(text,btn){
+  navigator.clipboard.writeText(text).then(()=>{
+    if(btn){btn.classList.add('ok');const o=btn.innerHTML;btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i>';setTimeout(()=>{btn.classList.remove('ok');btn.innerHTML=o;},1500);}
+  }).catch(()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();});
+}
+
+// ─── REPORTS ──────────────────────────────────────────────────────────────────
+function renderReports(){
+  const tot=allRows.length,appr=allRows.filter(isApproved).length;
+  const paidC=allRows.filter(isPaid).length,pend=allRows.filter(isPending).length;
+  const appRate=tot?Math.round(appr/tot*100):0,paidRate=tot?Math.round(paidC/tot*100):0;
+  document.getElementById('rep-stats').innerHTML=[
+    {l:'Total',v:tot,c:'primary',s:'campaigns'},
+    {l:'Approval rate',v:appRate+'%',c:'success',s:appr+' approved'},
+    {l:'Paid rate',v:paidRate+'%',c:'info',s:paidC+' paid campaigns'},
+    {l:'Pending',v:pend,c:'warning',s:'need review'}
+  ].map(s=>`<div class="sc"><p class="sc-lbl">${s.l}</p><p class="sc-val" style="color:var(--color-text-${s.c})">${s.v}</p><p class="sc-sub">${s.s}</p></div>`).join('');
+
+  const dateMap={};allRows.forEach(r=>{const d=g(r,'date')||'Unknown';dateMap[d]=(dateMap[d]||0)+1;});
+  const dateEnt=Object.entries(dateMap).sort((a,b)=>(parseDate(a[0])||0)-(parseDate(b[0])||0));
+  mkChart('c-date',{type:'line',data:{labels:dateEnt.map(e=>e[0]),datasets:[{label:'Requests',data:dateEnt.map(e=>e[1]),borderColor:COLS[0],backgroundColor:COLS[0]+'20',tension:.4,fill:true,pointBackgroundColor:COLS[0],pointRadius:4,pointHoverRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gCol()},ticks:{color:tCol(),font:{size:11},maxRotation:45}},y:{grid:{color:gCol()},ticks:{color:tCol(),font:{size:11}},beginAtZero:true}}}});
+
+  const desMap={};allRows.forEach(r=>{const d=g(r,'designer')||'Unassigned';desMap[d]=(desMap[d]||0)+1;});
+  const desEnt=Object.entries(desMap).sort((a,b)=>b[1]-a[1]);
+  const desH=Math.max(desEnt.length*38+50,130);
+  document.getElementById('c-des-wrap').style.height=desH+'px';
+  mkChart('c-des',{type:'bar',data:{labels:desEnt.map(e=>e[0]),datasets:[{data:desEnt.map(e=>e[1]),backgroundColor:desEnt.map((_,i)=>COLS[i%COLS.length]+'cc'),borderRadius:4,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gCol()},ticks:{color:tCol(),font:{size:11}},beginAtZero:true},y:{grid:{display:false},ticks:{color:tCol(),font:{size:12}}}}}});
+
+  const inprog=allRows.filter(r=>/(progress|review)/i.test(g(r,'approval'))).length;
+  const statVals=[appr,inprog,pend],statCols=[COLS[0],COLS[1],COLS[2]],statLbls=['Approved','In review','Pending'];
+  mkChart('c-status',{type:'doughnut',data:{labels:statLbls,datasets:[{data:statVals,backgroundColor:statCols,borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false}}}});
+  document.getElementById('leg-status').innerHTML=statLbls.map((l,i)=>`<span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:${statCols[i]}"></span>${l}: ${statVals[i]}</span>`).join('');
+
+  const vertMap={};allRows.forEach(r=>{const v=g(r,'vertical')||'Other';vertMap[v]=(vertMap[v]||0)+1;});
+  const vertEnt=Object.entries(vertMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const vertH=Math.max(vertEnt.length*38+50,130);
+  document.getElementById('c-vert-wrap').style.height=vertH+'px';
+  mkChart('c-vert',{type:'bar',data:{labels:vertEnt.map(e=>e[0]),datasets:[{data:vertEnt.map(e=>e[1]),backgroundColor:COLS[2]+'cc',borderRadius:4,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:gCol()},ticks:{color:tCol(),font:{size:11}},beginAtZero:true},y:{grid:{display:false},ticks:{color:tCol(),font:{size:12}}}}}});
+
+  const paidVals=[paidC,tot-paidC],paidCols=[COLS[0],COLS[6]],paidLbls=['Paid','App/Blog'];
+  mkChart('c-paid',{type:'doughnut',data:{labels:paidLbls,datasets:[{data:paidVals,backgroundColor:paidCols,borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false}}}});
+  document.getElementById('leg-paid').innerHTML=paidLbls.map((l,i)=>`<span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:${paidCols[i]}"></span>${l}: ${paidVals[i]}</span>`).join('');
+}
+
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+function sw(v){
+  ['dash','dfp','reports'].forEach(n=>{
+    document.getElementById('v-'+n).style.display=n===v?'block':'none';
+    document.getElementById('nb-'+n).className='sb-btn'+(n===v?' on':'');
+  });
+  if(v==='dfp'){renderNotifs();renderDFP();}
+  if(v==='reports')renderReports();
+}
+function resetApp(){
+  if(pollTimer)clearInterval(pollTimer);
+  sheetUrl='';allRows=[];notifList=[];
+  Object.keys(charts).forEach(k=>{charts[k].destroy();delete charts[k];});
+  document.getElementById('s-app').style.display='none';
+  document.getElementById('s-setup').style.display='block';
+  document.getElementById('sheet-url').value='';
+  document.getElementById('csv-in').value='';
+}
+
+// ─── SAMPLE DATA ──────────────────────────────────────────────────────────────
+function useSample(){
+  document.getElementById('csv-in').value=`DATE,End Date to be filled by Vertical,LP,Need Paid Yes/No,To Go Live On,Pointers by Verticals,Paid Communication,Article Links,Vertical,App Slot,Blogs Slot,Designer Assigned,,EXAM NAME & BATCH NAME,Tagline,Benefits & Offerings - Product USPs,CTA,Unit,,,,Paid Creative Tittle,Paid Creative Copy,Paid Creative Desc & CTA,Key Points,,,,,APPROVAL,Drive Link
+8 May,30 June,https://www.adda247.com/product/cuet-ug,Yes,11 May,CUET UG 2027 Foundation,Yes,,CUET UG,App 1st,,Anshul,,CUET UG Language+ GAT 2027 with Class 12 Prep,Start Early With Our Foundation Batch,"Interactive Live Lectures | Daily Practice Papers | E-Books | Doubt Sessions",Enroll Now!,,,,,"CUET Language Foundation","Start Your CUET Prep Early","Interactive Live Lectures | DPPs | E-Books",Live Classes DPPs Mock Tests,,,,,Approved,https://drive.google.com/drive/folders/1abc
+8 May,30 June,https://www.adda247.com/product/ssc-je-civil,Yes,,SSC JE 2026 GOLDEN CHANCE,Yes,,CIVIL ENGINEERING,App 1st,,Rinku,,SSC JE 2026 Notification Coming Soon,Join विजय मिशन 1.0 Batch (CIVIL),"Expert Faculty | Practice Tests | E-Books | Doubt Sessions",Enroll Now!,,,,,"SSC JE Civil Vijay Mission","Clear SSC JE With Expert Guidance","Expert Faculty | Practice Tests | E-Books",Expert Faculty Mock Tests,,,,,Approved,https://drive.google.com/drive/folders/2def
+8 May,30 June,https://www.adda247.com/product/rrb-mech,No,,RRB JE 2026 Foundation Mechanical,,App/Blog,MECHANICAL,App/Blog,,Rinku,,RRB JE 2026,Ace the Exam with आरंभ 2.0 Batch (MECH),"Interactive Lectures | Test Series | E-Books | Doubt Sessions",Join Now!,,,,,,,,,,,,,Pending,https://drive.google.com/drive/folders/3ghi
+10 May,30 June,https://www.careersadda.in/product/cuet-sci,Yes,11 May,CUET UG 2027 Science Foundation,Yes,,CUET UG,App 2nd,,Anshul,,CUET UG Science 2027 with Class 12 Prep,Start Early With Our Foundation Batch,"Interactive Live Lectures | Daily Practice Papers | E-Books",Enroll Now!,,,,,"CUET Science Foundation Batch","Ace CUET Science With Expert Faculty","Live Classes | DPPs | Mock Tests | E-Books",Live Classes Mock Tests,,,,,Pending,https://drive.google.com/drive/folders/4jkl
+10 May,30 June,https://www.adda247.com/product/ssc-elec,Yes,,SSC JE 2026 ELECTRICAL,Yes,,ELECTRICAL,App 1st,,Anshul,,SSC JE Electrical 2026,Join विजय मिशन Batch (ELECTRICAL),"Expert Faculty | Practice Tests | E-Books | Doubt Sessions",Enroll Now!,,,,,"SSC JE Electrical Batch","Clear SSC JE Electrical 2026","Expert Guidance | Practice Tests | E-Books",Mock Tests Practice Papers,,,,,Approved,https://drive.google.com/drive/folders/5mno
+12 May,30 June,https://www.adda247.com/product/banking,No,,Banking Foundation 2026,,App/Blog,BANKING,Feed 1st,,Anshul,,Banking Foundation 2026,Start Your Banking Journey,"Daily Practice Papers | Video Lectures | Mock Tests",Enroll Now!,,,,,,,,,,,,,Pending,https://drive.google.com/drive/folders/6pqr
+12 May,30 June,https://www.adda247.com/product/ssc-je-mech,Yes,,SSC JE 2026 MECHANICAL GOLDEN CHANCE,Yes,,MECHANICAL,App 1st,,Rinku,,SSC JE Mechanical 2026,Master SSC JE Mechanical with Expert Batch,"Expert Faculty | Full Syllabus | E-Books | Doubt Sessions",Enroll Now!,,,,,"SSC JE Mech Expert Batch","Master SSC JE Mechanical 2026","Expert Faculty | Syllabus Coverage | E-Books",Expert Faculty Full Syllabus,,,,,Approved,https://drive.google.com/drive/folders/7rst`;
+  loadCSV();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+(function init(){
+  const savedUrl=load('dfp-url');
+  const savedNotifs=load('dfp-notifs');
+  if(Array.isArray(savedNotifs))notifList=savedNotifs;
+  refreshBadge();
+  if(savedUrl){
+    sheetUrl=savedUrl;
+    document.getElementById('sheet-url').value=savedUrl;
+    setSyncState('spin','Auto-syncing...');
+    fetchSheet(savedUrl).then(csv=>{
+      if(csv)processData(csv,false).then(()=>startPolling());
+      else setSyncState('err','Could not reach sheet');
+    });
+  }
+})();
+</script>
+</body>
+</html>
