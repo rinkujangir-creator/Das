@@ -134,7 +134,7 @@ a:hover{text-decoration:underline}
 <div class="app" id="app">
 
 <!-- ─── SETUP SCREEN ─────────────────────────────────────────────────────── -->
-<div id="s-setup" style="max-width:500px;margin:2rem auto;padding:0 1rem">
+</div> style="max-width:500px;margin:2rem auto;padding:0 1rem">
   <div style="margin-bottom:20px">
     <p style="font-size:18px;font-weight:500;margin-bottom:3px">CreativeOps</p>
     <p style="font-size:13px;color:var(--color-text-secondary)">ADDA247 Design — DFP Campaign Dashboard</p>
@@ -164,7 +164,7 @@ a:hover{text-decoration:underline}
 </div>
 
 <!-- ─── MAIN APP ───────────────────────────────────────────────────────────── -->
-<div id="s-app" class="main-wrap" style="display:none">
+<div id="s-app" class="main-wrap">
 
   <!-- Sidebar -->
   <nav class="sb">
@@ -270,7 +270,9 @@ a:hover{text-decoration:underline}
 <script>
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let allRows=[], cmap={}, cardData=[], dfpF='all';
-let notifList=[], sheetUrl='', pollTimer=null;
+let notifList=[],
+sheetUrl='https://docs.google.com/spreadsheets/d/1iQALuRPTbOPu4IIWrY_WVd2p8e4GzJT_cVRy8Y5iQPY/edit?gid=237354369#gid=237354369',
+pollTimer=null;
 const charts={};
 const COLS=['#1D9E75','#378ADD','#BA7517','#D85A30','#7F77DD','#D4537E','#639922','#D05538'];
 
@@ -666,7 +668,7 @@ function useSample(){
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
-(function init(){
+(async function init(){   const savedNotifs=load('dfp-notifs');    if(Array.isArray(savedNotifs)){     notifList=savedNotifs;   }    refreshBadge();    if(sheetUrl){     setSyncState('spin','Loading dashboard...');      const csv=await fetchSheet(sheetUrl);      if(csv){       await processData(csv,false);       startPolling();     }else{       setSyncState('err','Could not load Google Sheet');       alert('Google Sheet fetch failed. Make sure sheet is published publicly as CSV.');     }   } })();
   const savedUrl=load('dfp-url');
   const savedNotifs=load('dfp-notifs');
   if(Array.isArray(savedNotifs))notifList=savedNotifs;
